@@ -16,8 +16,7 @@ const CadastroCliente = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
-      await api.post('/clientes', cliente, { headers: { Authorization: `Bearer ${token}` } });
+      await api.post('/clientes', cliente);
       alert("Cliente cadastrado com sucesso!");
       setCliente({ nome: '', telefone: '', endereco: '', bairro: '' });
     } catch (error) {

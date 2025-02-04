@@ -9,10 +9,9 @@ atendente_bp = Blueprint('atendente', __name__)
 
 # Rota para cadastrar cliente
 @atendente_bp.route('/clientes', methods=['POST'])
-@jwt_required()
 def cadastrar_cliente():
-    if not is_atendente():
-        return jsonify({"erro": "Acesso negado. Apenas atendentes podem cadastrar clientes."}), 403
+    # if not is_atendente():
+    #     return jsonify({"erro": "Acesso negado. Apenas atendentes podem cadastrar clientes."}), 403
 
     dados = request.json
     if not all(k in dados for k in ["nome", "telefone", "endereco", "bairro"]):

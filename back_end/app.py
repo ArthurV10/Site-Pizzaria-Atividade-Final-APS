@@ -4,11 +4,17 @@ from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 from pymongo import MongoClient
 import json
+from atendentes import atendente_bp
+from auth import auth_bp
+from flask_cors import CORS
 
 # Carregar variáveis de ambiente
 load_dotenv()
 
 app = Flask(__name__)
+
+# Configuração CORS
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Configurar JWT
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
@@ -19,8 +25,7 @@ client = MongoClient(os.getenv('MONGODB_URI'))
 db = client["pizzaria"]
 
 # Importar blueprints
-from atendentes import atendente_bp
-from auth import auth_bp
+
 
 app.register_blueprint(atendente_bp)
 app.register_blueprint(auth_bp)

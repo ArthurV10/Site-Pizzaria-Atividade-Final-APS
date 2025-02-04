@@ -10,9 +10,9 @@ const LoginAtendente = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/login', { email, senha });
-      setMensagem(`Bem-vindo, ${response.data.nome}!`);
-      localStorage.setItem('token', response.data.token); // Salvar token no localStorage
+      const response = await api.post('/login', { username: email, password: senha });
+      setMensagem(`Bem-vindo, ${response.data.username}!`);
+      localStorage.setItem('token', response.data.access_token); // Salvar token no localStorage
     } catch (error) {
       setMensagem('Erro ao fazer login');
     }
@@ -23,8 +23,8 @@ const LoginAtendente = () => {
       <h1>Login de Atendente</h1>
       <form onSubmit={handleSubmit}>
         <input
-          type="email"
-          placeholder="Email"
+          type="text"
+          placeholder="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required

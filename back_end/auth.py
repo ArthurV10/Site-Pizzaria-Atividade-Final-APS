@@ -7,8 +7,6 @@ import os
 from dotenv import load_dotenv
 from flask_jwt_extended import get_jwt_identity
 
-def is_atendente():
-
 # Carregar variáveis de ambiente
 load_dotenv()
 
@@ -49,7 +47,7 @@ def login():
         access_token = create_access_token(identity=user['username'], 
                                            additional_claims={"role": user['role']}, 
                                            expires_delta=datetime.timedelta(days=1))
-        return jsonify(access_token=access_token), 200
+        return jsonify(access_token=access_token, username=data["username"]), 200
     return jsonify({"error": "Invalid username or password"}), 401
 
 def is_atendente():
