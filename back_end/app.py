@@ -30,10 +30,9 @@ app.register_blueprint(auth_bp)
 def handle_exception(e):
     response = e.get_response()
     response.data = json.dumps({
-        "code": e.code,
-        "name": e.name,
-        "description": e.description,
+    "error": str(e),
     })
+
     response.content_type = "application/json"
     return response
 

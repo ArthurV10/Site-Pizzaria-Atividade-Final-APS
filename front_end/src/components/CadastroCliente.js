@@ -1,34 +1,40 @@
-// src/components/CadastroCliente.js
 import React, { useState } from 'react';
-import api from '../api'; // Verifique o caminho correto para a API
+import api from '../api';
 
 const CadastroCliente = () => {
-  const [nome, setNome] = useState('');
-  const [endereco, setEndereco] = useState('');
-  const [telefone, setTelefone] = useState('');
-  const [mensagem, setMensagem] = useState('');
+  const [cliente, setCliente] = useState({
+    nome: '',
+    telefone: '',
+    endereco: '',
+    bairro: ''
+  });
+
+  const handleChange = (e) => {
+    setCliente({ ...cliente, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await api.post('/cadastrar_cliente', { nome, endereco, telefone });
-      setMensagem(response.data.message);
+      const token = localStorage.getItem("token");
+      await api.post('/clientes', cliente, { headers: { Authorization: `Bearer ${token}` } });
+      alert("Cliente cadastrado com sucesso!");
+      setCliente({ nome: '', telefone: '', endereco: '', bairro: '' });
     } catch (error) {
-      setMensagem('Erro ao cadastrar cliente');
+      alert("Erro ao cadastrar cliente.");
     }
   };
 
   return (
     <div>
-      <h1>Cadastro de Cliente</h1>
+      <h2>Cadastro de Cliente</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
-        <input type="text" placeholder="Endereço" value={endereco} onChange={(e) => setEndereco(e.target.value)} required />
-        <input type="text" placeholder="Telefone" value={telefone} onChange={(e) => setTelefone(e.target.value)} required />
+        <input type="text" name="nome" placeholder="Nome" value={cliente.nome} onChange={handleChange} required />
+        <input type="text" name="telefone" placeholder="Telefone" value={cliente.telefone} onChange={handleChange} required />
+        <input type="text" name="endereco" placeholder="Endereço" value={cliente.endereco} onChange={handleChange} required />
+        <input type="text" name="bairro" placeholder="Bairro" value={cliente.bairro} onChange={handleChange} required />
         <button type="submit">Cadastrar</button>
       </form>
-      {mensagem && <p>{mensagem}</p>}
     </div>
   );
 };

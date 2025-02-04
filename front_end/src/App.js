@@ -12,12 +12,14 @@ const App = () => {
         <Routes>
           <Route path="/cadastro" element={<CadastroCliente />} />
           <Route path="/login" element={<LoginAtendente />} />
-          <Route path="/" exact>
-            <h2>Bem-vindo ao sistema de pizzaria!</h2>
-            <a href="/cadastro">Cadastrar Cliente</a>
-            <br />
-            <a href="/login">Login do Atendente</a>
-          </Route>
+          <Route path="/" element={
+            <div>
+              <h2>Bem-vindo ao sistema de pizzaria!</h2>
+              <a href="/cadastro">Cadastrar Cliente</a>
+              <br />
+              <a href="/login">Login do Atendente</a>
+            </div>
+          } />
         </Routes>
       </div>
     </Router>
