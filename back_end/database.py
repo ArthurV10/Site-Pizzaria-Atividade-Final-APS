@@ -1,16 +1,15 @@
+# backend/database.py
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 
-# Carregar variáveis de ambiente
+# Carregar variáveis de ambiente do .env
 load_dotenv()
 
-# Conectar ao MongoDB
-client = MongoClient(os.getenv("MONGODB_URI"))
+def init_db():
+    global db
+    client = MongoClient(os.getenv('MONGODB_URI', 'mongodb://localhost:27017/'))
+    db = client['pizzaria']
 
-# Selecionar o banco de dados
-db = client["pizzaria"]
-
-# Selecionar as coleções
-clientes_collection = db["clientes"]
-pedidos_collection = db["pedidos"]
+def get_db():
+    return db
