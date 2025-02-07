@@ -1,9 +1,11 @@
 // frontend/src/components/ListaPizzas.jsx
 import React, { useEffect, useState } from 'react';
 import { listarPizzas } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const ListaPizzas = () => {
   const [pizzas, setPizzas] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPizzas = async () => {
@@ -26,6 +28,7 @@ const ListaPizzas = () => {
           <li key={index}>{`${pizza.nome}`}</li>
         ))}
       </ul>
+      <button onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
     </div>
   );
 };

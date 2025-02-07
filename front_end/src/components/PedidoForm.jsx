@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { listarPizzas, registrarPedido } from '../services/api';
+import { listarPizzas, listarClientes, registrarPedido } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const PedidoForm = () => {
   const [pizzas, setPizzas] = useState([]);
+  const [clientes, setClientes] = useState([]);
   const [tamanho, setTamanho] = useState('');
   const [pizzaSelecionada, setPizzaSelecionada] = useState('');
+  const [clienteSelecionado, setClienteSelecionado] = useState('');
   const [preco, setPreco] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const pizzasResponse = await listarPizzas();
         setPizzas(pizzasResponse.data);
+        const clientesResponse = await listarClientes();
+        setClientes(clientesResponse.data);
       } catch (error) {
         console.error('Erro ao carregar dados:', error);
       }
@@ -51,7 +57,7 @@ const PedidoForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const pedido = { pizza: pizzaSelecionada, tamanho, preco };
+    const pedido = { pizza: pizzaSelecionada, tamanho, preco, cliente: clienteSelecionado };
     try {
       await registrarPedido(pedido);
       alert('Pedido registrado com sucesso!');
@@ -62,29 +68,32 @@ const PedidoForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Registro de Pedido</h2>
-      <label>
-        Pizza:
-        <select value={pizzaSelecionada} onChange={(e) => setPizzaSelecionada(e.target.value)} required>
-          <option value="">Selecione uma pizza</option>
-          {pizzas.map((pizza) => (
-            <option key={pizza.nome} value={pizza.nome}>{pizza.nome}</option>
-          ))}
-        </select>
-      </label>
-      <label>
-        Tamanho:
-        <select value={tamanho} onChange={(e) => setTamanho(e.target.value)} required>
-          <option value="">Selecione o tamanho</option>
-          <option key="pequena" value="Pequena">Pequena</option>
-          <option key="media" value="Média">Média</option>
-          <option key="grande" value="Grande">Grande</option>
-        </select>
-      </label>
-      <p>Preço: R$ {preco.toFixed(2)}</p>
-      <button type="submit">Registrar Pedido</button>
-    </form>
+    <div className="container">
+      <form onSubmit={handleSubmit}>
+        <h2>Registro de Pedido</h2>
+        <label>
+          Pizza:
+          <select value={pizzaSelecionada} onChange={(e) => setPizzaSelecionada(e.target.value)} required>
+            <option value="">Selecione uma pizza</option>
+            {pizzas.map((pizza) => (
+              <option key={pizza.nome} value={pizza.nome}>{pizza.nome}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Tamanho:
+          <select value={tamanho} onChange={(e) => setTamanho(e.target.value)} required>
+            <option value="">Selecione o tamanho</option>
+            <option key="pequena" value="Pequena">Pequena</option>
+            <option key="media" value="Média">Média</option>
+            <option key="grande" value="Grande">Grande</option>
+          </select>
+        </label>
+        <p>Preço: R$ {preco.toFixed(2)}</p>
+        <button type="submit">Registrar Pedido</button>
+        <button type="button" className="secondary" onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
+      </form>
+    </div>
   );
 };
 

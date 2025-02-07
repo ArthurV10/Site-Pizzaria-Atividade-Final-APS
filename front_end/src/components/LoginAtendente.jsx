@@ -1,10 +1,13 @@
+// frontend/src/components/LoginAtendente.jsx
 import React, { useState } from 'react';
 import { loginAtendente } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const AtendenteLoginForm = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagemErro, setMensagemErro] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,14 +15,15 @@ const AtendenteLoginForm = () => {
     try {
       await loginAtendente(atendente);
       alert('Login realizado com sucesso!');
-      setEmail('');  // Corrigindo para setEmail
-      setSenha('');  // Mantendo setSenha
+      setEmail('');
+      setSenha('');
       setMensagemErro('');
+      navigate('/dashboard'); // Redireciona para o Dashboard
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        setMensagemErro('Email ou senha incorretos.');  // Define a mensagem de erro vinda do backend
+        setMensagemErro('Email ou senha incorretos.');
       } else {
-        setMensagemErro('Erro ao realizar login.');  // Mensagem genérica para outros erros
+        setMensagemErro('Erro ao realizar login.');
       }
     }
   };
@@ -27,10 +31,10 @@ const AtendenteLoginForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Login de Atendente</h2>
-      {mensagemErro && <p style={{ color: 'red' }}>{mensagemErro}</p>} {/* Exibe a mensagem de erro */}
+      {mensagemErro && <p style={{ color: 'red' }}>{mensagemErro}</p>}
       <label>
         Email:
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />  {/* Pedindo email */}
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       </label>
       <label>
         Senha:

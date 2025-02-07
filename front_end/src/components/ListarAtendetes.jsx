@@ -1,10 +1,12 @@
-// src/components/AtendenteList.jsx
+// src/components/ListaAtendentes.jsx
 import React, { useState, useEffect } from 'react';
 import { listarAtendentes } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
-const AtendenteList = () => {
+const ListaAtendentes = () => {
   const [atendentes, setAtendentes] = useState([]);
   const [mensagemErro, setMensagemErro] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,8 +37,9 @@ const AtendenteList = () => {
           <li key={atendente.email}>{atendente.nome}</li>
         ))}
       </ul>
+      <button onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
     </div>
   );
 };
 
-export default AtendenteList;
+export default ListaAtendentes;

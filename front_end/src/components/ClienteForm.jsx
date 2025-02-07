@@ -1,10 +1,13 @@
+// frontend/src/components/ClienteForm.jsx
 import React, { useState } from 'react';
 import { cadastrarCliente } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const CadastroCliente = () => {
   const [nome, setNome] = useState('');
   const [numero, setNumero] = useState('');
   const [endereco, setEndereco] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,6 +52,7 @@ const CadastroCliente = () => {
         />
       </label>
       <button type="submit">Cadastrar Cliente</button>
+      <button onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
     </form>
   );
 };

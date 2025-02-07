@@ -1,9 +1,10 @@
-// frontend/src/components/ListaClientes.jsx
 import React, { useEffect, useState } from 'react';
 import { listarClientes } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const ListaClientes = () => {
   const [clientes, setClientes] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchClientes = async () => {
@@ -11,12 +12,18 @@ const ListaClientes = () => {
         const response = await listarClientes();
         setClientes(response.data);
       } catch (error) {
-        alert('Erro ao listar clientes!');
+        console.error('Erro ao listar clientes:', error);
+        if (error.response && error.response.status === 401) {
+          alert('Não autorizado. Por favor, faça login.');
+          navigate('/login-atendente');
+        } else {
+          alert('Erro ao listar clientes!');
+        }
       }
     };
 
     fetchClientes();
-  }, []);
+  }, [navigate]);
 
   return (
     <div>
@@ -26,6 +33,7 @@ const ListaClientes = () => {
           <li key={index}>{cliente.nome}</li>
         ))}
       </ul>
+      <button onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
     </div>
   );
 };

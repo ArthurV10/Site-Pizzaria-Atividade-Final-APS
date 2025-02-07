@@ -1,17 +1,20 @@
+// frontend/src/components/PizzaForm.jsx
 import React, { useState } from 'react';
 import { cadastrarPizza } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const PizzaForm = () => {
   const [nome, setNome] = useState('');
   const [ingredientes, setIngredientes] = useState('');
   const [preco, setPreco] = useState('');
   const [mensagemErro, setMensagemErro] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const pizza = { nome, ingredientes, preco };
     try {
-      await cadastrarPizza (pizza);
+      await cadastrarPizza(pizza);
       alert('Pizza cadastrada com sucesso!');
       setNome('');
       setIngredientes('');
@@ -43,6 +46,7 @@ const PizzaForm = () => {
         <input type="text" value={preco} onChange={(e) => setPreco(e.target.value)} required />
       </label>
       <button type="submit">Cadastrar</button>
+      <button onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
     </form>
   );
 };

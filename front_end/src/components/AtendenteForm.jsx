@@ -1,49 +1,61 @@
 import React, { useState } from 'react';
 import { cadastrarAtendente } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const AtendenteForm = () => {
   const [nome, setNome] = useState('');
-  const [email, setEmail] = useState(''); // Alterando de 'usuario' para 'email'
+  const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [mensagemErro, setMensagemErro] = useState(''); // Adicionando estado para mensagem de erro
+  const [mensagemErro, setMensagemErro] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const atendente = { nome, email, senha }; // Alterando de 'usuario' para 'email'
+    const atendente = { nome, email, senha };
     try {
       await cadastrarAtendente(atendente);
       alert('Atendente cadastrado com sucesso!');
       setNome('');
-      setEmail(''); // Alterando de 'usuario' para 'email'
+      setEmail('');
       setSenha('');
-      setMensagemErro(''); // Limpa a mensagem de erro
+      setMensagemErro('');
+      navigate('/dashboard'); // Redireciona para o Dashboard após cadastro
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        setMensagemErro(error.response.data.erro); // Define a mensagem de erro vinda do backend
+        setMensagemErro(error.response.data.erro);
       } else {
-        setMensagemErro('Erro ao cadastrar atendente.'); // Mensagem genérica para outros erros
+        setMensagemErro('Erro ao cadastrar atendente.');
       }
     }
   };
 
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Cadastro de Atendente</h2>
-      {mensagemErro && <p style={{ color: 'red' }}>{mensagemErro}</p>} {/* Exibe a mensagem de erro */}
-      <label>
-        Nome:
-        <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required />
-      </label>
-      <label>
-        Email:
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /> {/* Alterando de 'usuario' para 'email' */}
-      </label>
-      <label>
-        Senha:
-        <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
-      </label>
-      <button type="submit">Cadastrar</button>
-    </form>
+    <div className="container">
+      <form onSubmit={handleSubmit}>
+        <h2>Cadastro de Atendente</h2>
+        {mensagemErro && <p style={{ color: 'red' }}>{mensagemErro}</p>}
+        <label>
+          Nome:
+          <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required />
+        </label>
+        <label>
+          Email:
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </label>
+        <label>
+          Senha:
+          <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
+        </label>
+        <div className="button-container">
+          <button type="submit">Cadastrar</button>
+          <button type="button" className="secondary" onClick={handleBackToHome}>Retornar ao Home</button>
+        </div>
+      </form>
+    </div>
   );
 };
 

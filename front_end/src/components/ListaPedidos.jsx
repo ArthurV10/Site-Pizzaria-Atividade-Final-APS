@@ -1,8 +1,11 @@
+// frontend/src/components/ListaPedidos.jsx
 import React, { useState, useEffect } from 'react';
 import { listarPedidos } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const ListaPedidos = () => {
   const [pedidos, setPedidos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +30,7 @@ const ListaPedidos = () => {
           </li>
         ))}
       </ul>
+      <button onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
     </div>
   );
 };
