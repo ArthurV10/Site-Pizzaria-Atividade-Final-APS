@@ -1,7 +1,7 @@
-// frontend/src/components/LoginAtendente.jsx
 import React, { useState } from 'react';
 import { loginAtendente } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import '../styles.css'; // Importar o CSS para estilizar o botão
 
 const AtendenteLoginForm = () => {
   const [email, setEmail] = useState('');
@@ -28,20 +28,29 @@ const AtendenteLoginForm = () => {
     }
   };
 
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login de Atendente</h2>
-      {mensagemErro && <p style={{ color: 'red' }}>{mensagemErro}</p>}
-      <label>
-        Email:
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      </label>
-      <label>
-        Senha:
-        <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
-      </label>
-      <button type="submit">Login</button>
-    </form>
+    <div className="login-container">
+      <form onSubmit={handleSubmit} className="login-form">
+        <h2>Login de Atendente</h2>
+        {mensagemErro && <p style={{ color: 'red' }}>{mensagemErro}</p>}
+        <label>
+          Email:
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </label>
+        <label>
+          Senha:
+          <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
+        </label>
+        <div className="button-container">
+          <button type="submit">Login</button>
+          <button type="button" className="secondary" onClick={handleBackToHome}>Retornar ao Home</button>
+        </div>
+      </form>
+    </div>
   );
 };
 

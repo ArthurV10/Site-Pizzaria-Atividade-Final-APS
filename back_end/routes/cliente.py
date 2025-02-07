@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from models.cliente import criar_cliente, buscar_cliente_por_id, listar_clientes
+from database import get_db
 
 cliente_bp = Blueprint('clientes', __name__)
 
@@ -23,6 +24,10 @@ def obter_cliente(id):
     return jsonify({"erro": "Cliente não encontrado."}), 404
 
 @cliente_bp.route('/', methods=['GET'])
-def listar():
-    clientes = listar_clientes()
-    return jsonify(clientes)
+def listar_clientes():
+    try:
+        db = get_db()
+        clientes = list(db.cliente.find({}, {'_id': 0, 'nome': 1, 'numero': 1, 'endereco': 1}))
+        return jsonify(clientes)
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500

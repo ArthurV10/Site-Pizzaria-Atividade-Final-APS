@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { listarPizzas, listarClientes, registrarPedido } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import '../styles.css'; // Certifique-se de importar o CSS
 
 const PedidoForm = () => {
   const [pizzas, setPizzas] = useState([]);
@@ -15,9 +16,9 @@ const PedidoForm = () => {
     const fetchData = async () => {
       try {
         const pizzasResponse = await listarPizzas();
-        setPizzas(pizzasResponse.data);
+        setPizzas(Array.isArray(pizzasResponse.data) ? pizzasResponse.data : []);
         const clientesResponse = await listarClientes();
-        setClientes(clientesResponse.data);
+        setClientes(Array.isArray(clientesResponse.data) ? clientesResponse.data : []);
       } catch (error) {
         console.error('Erro ao carregar dados:', error);
       }
@@ -57,7 +58,8 @@ const PedidoForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const pedido = { pizza: pizzaSelecionada, tamanho, preco, cliente: clienteSelecionado };
+    const cliente = clientes.find(c => c.nome === clienteSelecionado);
+    const pedido = { pizza: pizzaSelecionada, tamanho, preco, cliente: cliente ? cliente.nome : '' };
     try {
       await registrarPedido(pedido);
       alert('Pedido registrado com sucesso!');
@@ -65,6 +67,10 @@ const PedidoForm = () => {
       console.error('Erro ao registrar pedido:', error);
       alert('Erro ao registrar pedido!');
     }
+  };
+
+  const handleClienteChange = (e) => {
+    setClienteSelecionado(e.target.value);
   };
 
   return (
@@ -81,6 +87,15 @@ const PedidoForm = () => {
           </select>
         </label>
         <label>
+          Cliente:
+          <select value={clienteSelecionado} onChange={handleClienteChange} required>
+            <option value="">Selecione um cliente</option>
+            {clientes.map((cliente) => (
+              <option key={cliente.nome} value={cliente.nome}>{cliente.nome}</option>
+            ))}
+          </select>
+        </label>
+        <label>
           Tamanho:
           <select value={tamanho} onChange={(e) => setTamanho(e.target.value)} required>
             <option value="">Selecione o tamanho</option>
@@ -90,8 +105,10 @@ const PedidoForm = () => {
           </select>
         </label>
         <p>Preço: R$ {preco.toFixed(2)}</p>
-        <button type="submit">Registrar Pedido</button>
-        <button type="button" className="secondary" onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
+        <div className="button-container">
+          <button type="submit">Registrar Pedido</button>
+          <button type="button" className="secondary" onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
+        </div>
       </form>
     </div>
   );

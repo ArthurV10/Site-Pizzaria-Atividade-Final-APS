@@ -1,0 +1,502 @@
+/* styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2 {
+    color: #333;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  
+  button.secondary {
+    background-color: #f44336;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin: 10px 0 5px;
+    color: #555;
+  }
+  
+  input[type="text"], input[type="email"], input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* styles.css */
+
+/* Adicione este código ao seu CSS existente */
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .orders-table th, .orders-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .orders-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .orders-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .orders-table tr:hover {
+    background-color: #ddd;
+  }
+
+  /* styles.css */
+
+/* Adicione este código ao seu CSS existente */
+
+.orders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .order-block {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .order-block:hover {
+    transform: scale(1.05);
+  }
+  
+  .order-block h3 {
+    margin-top: 0;
+    color: #4CAF50;
+  }
+  
+  .order-block p {
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  /* styles.css */
+
+/* Adicione este código ao seu CSS existente */
+
+.pizzas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .pizza-block {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .pizza-block:hover {
+    transform: scale(1.05);
+  }
+  
+  .pizza-block h3 {
+    margin-top: 0;
+    color: #4CAF50;
+  }
+  
+  .pizza-block p {
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .atendentes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .atendente-block {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .atendente-block:hover {
+    transform: scale(1.05);
+  }
+  
+  .atendente-block h3 {
+    margin-top: 0;
+    color: #4CAF50;
+  }
+  
+  .atendente-block p {
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  .dashboard-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2em;
+    text-align: center;
+  }
+  
+  .dashboard-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .dashboard-buttons button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dashboard-buttons button:hover {
+    background-color: #45a049;
+  }
+  
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  .home-container h2 {
+    margin-bottom: 40px;
+    color: #333;
+    font-size: 2.5em;
+    text-align: center;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .button-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-container button:hover {
+    background-color: #45a049;
+  }
+
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    padding: 10px;
+  }
+  
+  .login-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  
+  .login-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .button-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  .button-container button.secondary {
+    background-color: #f44336;
+  }
+  
+  .button-container button:hover {
+    opacity: 0.8;
+  }
+
+ /* styles.css */
+
+/* Estilos para o formulário de cadastro de cliente */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .client-form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .client-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  
+  .client-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .client-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: -50px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .button-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  .button-container button.secondary {
+    background-color: #f44336;
+  }
+  
+  .button-container button:hover {
+    opacity: 0.8;
+  }
+  
+  /* styles.css */
+
+/* Estilos para a lista de clientes */
+.clientes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .cliente-block {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .cliente-block:hover {
+    transform: scale(1.05);
+  }
+  
+  .cliente-block h3 {
+    margin-top: 0;
+    color: #4CAF50;
+  }
+  
+  .cliente-block p {
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  /* styles.css */
+
+/* Estilos para o formulário de cadastro de pizza */
+form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 10px;
+  color: #555;
+  font-weight: bold;
+}
+
+form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+form button.secondary {
+  background-color: #f44336;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+form button.secondary:hover {
+  background-color: #d32f2f;
+}
+
+form p {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
+
+  

@@ -1,7 +1,7 @@
-// src/components/ListaAtendentes.jsx
 import React, { useState, useEffect } from 'react';
 import { listarAtendentes } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import '../styles.css'; // Certifique-se de importar o CSS
 
 const ListaAtendentes = () => {
   const [atendentes, setAtendentes] = useState([]);
@@ -29,14 +29,20 @@ const ListaAtendentes = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <h2>Lista de Atendentes</h2>
-      {mensagemErro && <p style={{ color: 'red' }}>{mensagemErro}</p>}
-      <ul>
-        {Array.isArray(atendentes) && atendentes.map((atendente) => (
-          <li key={atendente.email}>{atendente.nome}</li>
-        ))}
-      </ul>
+      {mensagemErro ? (
+        <p style={{ color: 'red' }}>{mensagemErro}</p>
+      ) : (
+        <div className="atendentes-grid">
+          {Array.isArray(atendentes) && atendentes.map((atendente) => (
+            <div key={atendente.email} className="atendente-block">
+              <h3>{atendente.nome}</h3>
+              <p><strong>Email:</strong> {atendente.email}</p>
+            </div>
+          ))}
+        </div>
+      )}
       <button onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
     </div>
   );

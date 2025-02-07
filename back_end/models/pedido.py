@@ -1,14 +1,24 @@
 from database import get_db
 
-def criar_pedido(pizza, tamanho, preco):
-    db = get_db()
-    db.pedido.insert_one({"pizza": pizza, "tamanho": tamanho, "preco": preco})
-    return True
+def criar_pedido(pizza, tamanho, preco, cliente):
+    try:
+        db = get_db()
+        db.pedido.insert_one({
+            "pizza": pizza,
+            "tamanho": tamanho,
+            "preco": preco,
+            "cliente": cliente
+        })
+        return True
+    except Exception as e:
+        print(f"Erro ao criar pedido: {e}")
+        return False
 
 def listar_pedidos():
-    db = get_db()
-    return list(db.pedido.find({}, {"_id": 0, "cliente": 1, "pizza": 1, "tamanho": 1, "preco": 1}))
-
-def buscar_pedido_por_id(pedido_id):
-    db = get_db()
-    return db.pedido.find_one({"_id": pedido_id})
+    try:
+        db = get_db()
+        pedidos = list(db.pedido.find({}, {'_id': 0, 'pizza': 1, 'tamanho': 1, 'preco': 1, 'cliente': 1}))
+        return pedidos
+    except Exception as e:
+        print(f"Erro ao listar pedidos: {e}")
+        return []

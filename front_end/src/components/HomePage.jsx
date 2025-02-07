@@ -1,6 +1,6 @@
-// src/components/HomePage.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles.css'; // Certifique-se de importar o CSS
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container">
+    <div className="home-container">
       <h2>Bem-vindo ao Sistema de Pizzaria</h2>
       <div className="button-container">
         <button onClick={handleLogin}>Login de Atendente</button>
@@ -25,4 +25,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-    

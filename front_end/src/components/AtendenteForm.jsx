@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { cadastrarAtendente } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import '../styles.css';
 
 const AtendenteForm = () => {
   const [nome, setNome] = useState('');

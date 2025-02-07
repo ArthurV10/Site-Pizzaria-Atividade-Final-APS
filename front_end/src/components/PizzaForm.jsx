@@ -1,7 +1,7 @@
-// frontend/src/components/PizzaForm.jsx
 import React, { useState } from 'react';
 import { cadastrarPizza } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import '../styles.css'; // Importar o CSS para estilizar o formulário
 
 const PizzaForm = () => {
   const [nome, setNome] = useState('');
@@ -46,7 +46,7 @@ const PizzaForm = () => {
         <input type="text" value={preco} onChange={(e) => setPreco(e.target.value)} required />
       </label>
       <button type="submit">Cadastrar</button>
-      <button onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
+      <button type="button" className="secondary" onClick={() => navigate('/dashboard')}>Retornar ao Dashboard</button>
     </form>
   );
 };
